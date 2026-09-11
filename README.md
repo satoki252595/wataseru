@@ -4,7 +4,20 @@
 
 人が増えても社長が忙しくなる会社は、仕事が頭の中に残ったままだからである。ワタセルは、社長やベテランの頭の中にある仕事を、新人・外注・AIに渡せる言葉にする。
 
-このリポジトリは **設計書兼マスタープロンプト** と、実装時に分割するシステムプロンプト一式である。
+**同じフロントで本番 Web アプリを組むときの要件は [`REQUIREMENTS.md`](./REQUIREMENTS.md)。** 画面・トークン・文言の正本ソースは [`frontend/`](./frontend/)。作り直さない。
+
+このリポジトリは設計書兼マスタープロンプト、実装時に分割するシステムプロンプト、Phase 1 の要件一覧、凍結したフロントである。
+
+## 文書の場所
+
+| 見るもの | ファイル |
+| --- | --- |
+| 実装要件（何を作るか） | [`REQUIREMENTS.md`](./REQUIREMENTS.md) |
+| 凍結フロント（画面の正本） | [`frontend/`](./frontend/) |
+| 思想・取材手順・成果物テンプレ | [`DESIGN.md`](./DESIGN.md) |
+| 1業務の JSON | [`schema/work.schema.json`](./schema/work.schema.json) |
+| エージェント指示 | [`prompts/`](./prompts/) |
+| 完成例（施工店・請求。数字は架空） | [`examples/seko-seikyu.md`](./examples/seko-seikyu.md) |
 
 ## 使い方（プロンプト運用 / Phase 0）
 
@@ -30,9 +43,7 @@
 | [`prompts/system_decompose.md`](./prompts/system_decompose.md) | 分解（第7章） |
 | [`prompts/system_router.md`](./prompts/system_router.md) | 仕分け（第5章 C） |
 | [`prompts/system_write.md`](./prompts/system_write.md) | 執筆（第8章） |
-| [`prompts/system_qa.md`](./prompts/system_qa.md) | 監柄（第10章） |
-
-データモデルは [`schema/work.schema.json`](./schema/work.schema.json)。完成例は [`examples/seko-seikyu.md`](./examples/seko-seikyu.md)（施工店・請求。数字は架空）。
+| [`prompts/system_qa.md`](./prompts/system_qa.md) | 監査（第10章） |
 
 ## やらないこと
 
@@ -44,3 +55,4 @@
 ## 改訂
 
 - 2026-09-11 初版
+- 2026-09-12 Phase 1 Web アプリ要件（`REQUIREMENTS.md`）。フロントは現行プロトタイプで固定（`frontend/`）
