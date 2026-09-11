@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/satoki252595/wataseru/schema/work.schema.json",
+  "title": "WataseruWork",
+  "type": "object",
+  "required": [
+    "work_id",
+    "name_official",
+    "name_field",
+    "owner_role",
+    "purpose",
+    "start_conditions",
+    "done_when",
+    "steps",
+    "handoff"
+  ],
+  "properties": {
+    "work_id": { "type": "string" },
+    "name_official": { "type": "string" },
+    "name_field": { "type": "string" },
+    "owner_role": { "type": "string" },
+    "beneficiary": { "type": "string" },
+    "trigger": { "type": "string" },
+    "frequency": { "type": "string" },
+    "sla": { "type": "string" },
+    "purpose": { "type": "string" },
+    "start_conditions": { "type": "array", "items": { "type": "string" } },
+    "done_when": { "type": "array", "items": { "type": "string" } },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "from": { "type": "string" },
+          "format": { "type": "string" }
+        },
+        "required": ["name"]
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "to": { "type": "string" },
+          "tool": { "type": "string" }
+        },
+        "required": ["name"]
+      }
+    },
+    "tools": { "type": "array", "items": { "type": "string" } },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "action": { "type": "string" },
+          "actor": { "type": "string" },
+          "route": {
+            "oneOf": [
+              { "type": "string", "enum": ["human_required", "outsourceable", "ai_capable"] },
+              {
+                "type": "array",
+                "items": { "type": "string", "enum": ["human_required", "outsourceable", "ai_capable"] }
+              }
+            ]
+          },
+          "decision": { "type": ["string", "null"] },
+          "tools": { "type": "array", "items": { "type": "string" } },
+          "time_min": { "type": "number" },
+          "look_at": { "type": "string" },
+          "hand": { "type": "string" }
+        },
+        "required": ["id", "action", "actor", "route"]
+      }
+    },
+    "decisions": { "type": "array" },
+    "exceptions": { "type": "array" },
+    "never_do": { "type": "array", "items": { "type": "string" } },
+    "failures": { "type": "array", "items": { "type": "string" } },
+    "quality_bar": { "type": "array", "items": { "type": "string" } },
+    "handoff": {
+      "type": "object",
+      "properties": {
+        "employee": { "type": "string" },
+        "outsource": { "type": "string" },
+        "ai": { "type": "string" }
+      }
+    },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "open_questions": { "type": "array", "items": { "type": "string" } },
+    "escalate": { "type": "string" },
+    "time_estimate": { "type": "string" },
+    "filename_rule": { "type": "string" },
+    "save_to": { "type": "string" },
+    "personal_info": { "type": "string" },
+    "revision_date": { "type": "string" },
+    "revision_reason": { "type": "string" },
+    "next_work": { "type": "string" }
+  }
+}
