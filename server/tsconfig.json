@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "rootDir": "..",
+    "noEmit": true,
+    "paths": {
+      "@wataseru/shared": ["../shared/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "../shared/src/**/*.ts"]
+}

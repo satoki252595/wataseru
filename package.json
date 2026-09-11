@@ -1,0 +1,48 @@
+{
+  "name": "wataseru",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "ワタセル — 採用の前に、仕事を言葉にする",
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c green,cyan \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "tsx watch --tsconfig server/tsconfig.json server/src/index.ts",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build": "vite build --config web/vite.config.ts",
+    "start": "NODE_ENV=production tsx --tsconfig server/tsconfig.json server/src/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p server/tsconfig.json --noEmit && tsc -p web/tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@tanstack/react-router": "^1.131.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.6.1",
+    "hono": "^4.9.8",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwind-merge": "^3.3.1",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/router-plugin": "^1.131.0",
+    "@types/node": "^22.18.1",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "concurrently": "^9.2.1",
+    "tailwindcss": "^4.1.13",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  }
+}

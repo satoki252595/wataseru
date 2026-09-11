@@ -6,7 +6,38 @@
 
 **同じフロントで本番 Web アプリを組むときの要件は [`REQUIREMENTS.md`](./REQUIREMENTS.md)。** 画面・トークン・文言の正本ソースは [`frontend/`](./frontend/)。作り直さない。
 
-このリポジトリは設計書兼マスタープロンプト、実装時に分割するシステムプロンプト、Phase 1 の要件一覧、凍結したフロントである。
+このリポジトリは設計書兼マスタープロンプト、実装時に分割するシステムプロンプト、Phase 1 の要件一覧、凍結したフロント、および Hono の本番 Web アプリである。
+
+## 動かす（Phase 1 Web）
+
+画面は [`frontend/`](./frontend/) のまま。サーバは Hono。保存は会社（テナント）単位の SQLite。LLM キーはサーバのみ。
+
+```bash
+cp .env.example .env
+npm install
+npm test
+npm run dev
+```
+
+ブラウザは http://localhost:5173 。API は http://127.0.0.1:8787（Vite が `/api` を代理する）。
+
+本番相当:
+
+```bash
+npm run build
+npm start
+```
+
+| 場所 | 役割 |
+| --- | --- |
+| `server/` | Hono。認証、業務、取材、文字起こし、共有 |
+| `web/` | 凍結フロントの移植。localStorage を API に差し替え |
+| `shared/` | 型、第8章テンプレ、第10章 QA |
+| `data/` | SQLite と原本ファイル（学習に回さない） |
+
+`.env` の `XAI_API_KEY` または `OPENAI_API_KEY` が取材・分解用。文字起こしは Whisper 系（`OPENAI_API_KEY`）。無いときは取材を閉じず「書いてください」に戻す。ユーザー素材は学習に使わない（`store: false`）。
+
+会社をつくる → 現場の呼び名で始める → 取材（マイクは Web Speech + 録音アップロード）→ 「出す」→ 成果物。共有リンクは閲覧または発注書ビュー。デモ「請求まわす」は削除不可。数字は架空。
 
 ## 文書の場所
 
@@ -56,3 +87,4 @@
 
 - 2026-09-11 初版
 - 2026-09-12 Phase 1 Web アプリ要件（`REQUIREMENTS.md`）。フロントは現行プロトタイプで固定（`frontend/`）
+- 2026-09-12 Hono 本番アプリ（テナント、DB、取材 API、共有リンク）
